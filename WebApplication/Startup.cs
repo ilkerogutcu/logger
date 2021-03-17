@@ -34,6 +34,7 @@ namespace WebApplication
             });
             services.AddTransient<FileLogger>();
             services.AddTransient<MongoDbLogger>();
+            services.AddTransient<ElasticsearchLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,8 +12,10 @@ namespace Business.Concrete
     {
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [LogAspect(typeof(ElasticsearchLogger))]
         public IDataResult<List<Employee>> GetAll()
         {
+            
             return new SuccessDataResult<List<Employee>>(new List<Employee>
             {
                 new()

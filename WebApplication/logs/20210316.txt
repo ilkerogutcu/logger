@@ -25,3 +25,5 @@
 2021-03-16 17:27:39.131 +03:00 [Information] OnBefore: {"FullName":null,"MethodName":"GetAll","User":"?","Parameters":[]}
 2021-03-16 17:34:00.688 +03:00 [Information] OnBefore: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}
 2021-03-16 17:34:00.725 +03:00 [Information] OnSuccess Method Name: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}
+2021-03-16 18:26:11.913 +03:00 [Information] OnBefore: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}
+2021-03-16 18:26:11.946 +03:00 [Information] OnSuccess Method Name: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}

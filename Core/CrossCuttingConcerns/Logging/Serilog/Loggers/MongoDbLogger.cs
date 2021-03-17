@@ -16,7 +16,7 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
             
             _logger = new LoggerConfiguration()
                 .WriteTo.MongoDB(logConfig.ConnectionString)
-                .WriteTo.Seq("http://localhost:5341/")
+                .WriteTo.Seq(logConfig.SeqConnectionString)
                  .CreateLogger();
         }
     }

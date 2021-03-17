@@ -25,7 +25,7 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
                     retainedFileCountLimit: null,
                     fileSizeLimitBytes: 5000000,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}")
-                    .WriteTo.Seq("http://localhost:5341/")
+                    .WriteTo.Seq(logConfig.SeqConnectionString)
                     .CreateLogger();
         }
 
