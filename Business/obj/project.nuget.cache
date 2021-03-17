@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QNBqCNa1rUqTtTZepEllcgRdIDSt2r0PAJ5n+1qa3wFRDw+BSvqKT/w5Jegf+rEYzCRwtA1XCJK9fbBkumkqJQ==",
+  "dgSpecHash": "Gvq2nc7l8YmhTL7v/PAY6X8o5unsj4ohTbsr99Xqu+zgXmUT2xPxbb2jdxCDKr1nzBZZpZpDHcmC3R+Yv8+u8g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj",
+  "projectFilePath": "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\olcsa\\.nuget\\packages\\autofac\\6.1.0\\autofac.6.1.0.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\autofac.extensions.dependencyinjection\\7.1.0\\autofac.extensions.dependencyinjection.7.1.0.nupkg.sha512",
