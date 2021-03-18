@@ -13,6 +13,9 @@ namespace Business.DependencyResolvers
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<EmployeeManager>().As<IEmployeeService>().SingleInstance();
+            builder.RegisterType<ElasticSearchLogManager>().As<IElasticSearchLogService>().SingleInstance();
+            builder.RegisterType<FileLogManager>().As<IFileLogService>().SingleInstance();
+            
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

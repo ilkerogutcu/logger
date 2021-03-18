@@ -8613,11 +8613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\obj\\",
+      "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",

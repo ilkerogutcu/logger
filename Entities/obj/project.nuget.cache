@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Qm6OtRUsItYNn6jyGNkZysQ6RnmMCpDgam3AYWaC0AEBx2Kclc1+t02o1hrgG5MSwCHBJUPeNP1iZFjUzkd87Q==",
+  "dgSpecHash": "uQO9hkkNlOVwvuwukJD986WBOZC4D4R4BF2I4F1rlJjXKUMvepTchHufEO9bWgCNvb4gN+zerXXZtMW1YF3R2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj",
+  "projectFilePath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\olcsa\\.nuget\\packages\\autofac\\6.1.0\\autofac.6.1.0.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\autofac.extensions.dependencyinjection\\7.1.0\\autofac.extensions.dependencyinjection.7.1.0.nupkg.sha512",

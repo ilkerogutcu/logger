@@ -85,3 +85,7 @@ C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\ref\WebAppli
 C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\WebApplication.pdb
 C:\Users\olcsa\RiderProjects\Logger\WebApplication\obj\Debug\net5.0\WebApplication.csproj.CopyComplete
 C:\Users\olcsa\RiderProjects\Logger\WebApplication\obj\Debug\net5.0\WebApplication.genruntimeconfig.cache
+C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\Ionic.Zip.dll
+C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\System.Text.Encoding.CodePages.dll
+C:\Users\olcsa\RiderProjects\Logger\WebApplication\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll

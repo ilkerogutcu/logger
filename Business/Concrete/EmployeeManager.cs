@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac;
@@ -15,7 +16,6 @@ namespace Business.Concrete
         [LogAspect(typeof(ElasticsearchLogger))]
         public IDataResult<List<Employee>> GetAll()
         {
-            
             return new SuccessDataResult<List<Employee>>(new List<Employee>
             {
                 new()

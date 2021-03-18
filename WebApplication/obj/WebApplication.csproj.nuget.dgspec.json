@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\olcsa\\Desktop\\logger\\WebApplication\\WebApplication.csproj": {}
+    "C:\\Users\\olcsa\\RiderProjects\\Logger\\WebApplication\\WebApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj": {
+    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj",
+        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj",
         "projectName": "Business",
-        "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj",
+        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj",
         "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\Desktop\\logger\\Business\\obj\\",
+        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj"
+              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj"
               },
-              "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj"
+              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj"
               }
             }
           }
@@ -54,6 +54,14 @@
             "Autofac.Extras.DynamicProxy": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Ionic.Zip": {
+              "target": "Package",
+              "version": "[1.9.1.8, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[6.0.0-preview.2.21154.6, )"
             }
           },
           "imports": [
@@ -75,14 +83,14 @@
         }
       }
     },
-    "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj": {
+    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\obj\\",
+        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -183,14 +191,14 @@
         }
       }
     },
-    "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj": {
+    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\Entities.csproj",
+        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\Desktop\\logger\\Entities\\obj\\",
+        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -207,8 +215,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj"
+              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj"
               }
             }
           }
@@ -241,14 +249,14 @@
         }
       }
     },
-    "C:\\Users\\olcsa\\Desktop\\logger\\WebApplication\\WebApplication.csproj": {
+    "C:\\Users\\olcsa\\RiderProjects\\Logger\\WebApplication\\WebApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\Desktop\\logger\\WebApplication\\WebApplication.csproj",
+        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\WebApplication\\WebApplication.csproj",
         "projectName": "WebApplication",
-        "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\WebApplication\\WebApplication.csproj",
+        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\WebApplication\\WebApplication.csproj",
         "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\Desktop\\logger\\WebApplication\\obj\\",
+        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\WebApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -265,11 +273,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Business\\Business.csproj"
+              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj": {
+                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Business\\Business.csproj"
               },
-              "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\Desktop\\logger\\Core\\Core.csproj"
+              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj"
               }
             }
           }
@@ -284,6 +292,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Ionic.Zip": {
+              "target": "Package",
+              "version": "[1.9.1.8, )"
+            },
             "Serilog.AspNetCore": {
               "target": "Package",
               "version": "[4.0.0, )"
@@ -295,6 +307,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
+            },
+            "System.Text.Encoding.CodePages": {
+              "target": "Package",
+              "version": "[6.0.0-preview.2.21154.6, )"
             }
           },
           "imports": [

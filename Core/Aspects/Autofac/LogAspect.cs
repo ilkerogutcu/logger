@@ -12,10 +12,12 @@ using Newtonsoft.Json;
 
 namespace Core.Aspects.Autofac
 {
+    [Serializable]
     public class LogAspect : MethodInterception //Aspect
     {
         private readonly LoggerServiceBase _loggerServiceBase;
         private readonly IHttpContextAccessor _httpContextAccessor;
+
 
         public LogAspect(Type loggerService)
         {
