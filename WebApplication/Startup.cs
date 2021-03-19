@@ -1,4 +1,6 @@
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
+using Core.DataAccess.MongoDb.Abstract;
+using Core.DataAccess.MongoDb.Concrete;
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
@@ -7,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace WebApplication
@@ -35,6 +38,10 @@ namespace WebApplication
             services.AddTransient<FileLogger>();
             services.AddTransient<MongoDbLogger>();
             services.AddTransient<ElasticsearchLogger>();
+            services.Configure<MongoDbSettings>(
+                Configuration.GetSection(nameof(MongoDbSettings)));
+            services.AddSingleton<IMongoDbSettings>(sp =>
+                sp.GetRequiredService<IOptions<MongoDbSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

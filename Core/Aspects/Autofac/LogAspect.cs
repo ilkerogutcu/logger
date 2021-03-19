@@ -39,12 +39,12 @@ namespace Core.Aspects.Autofac
                 $"OnException {result}");
         }
 
-        protected override void OnSuccess(IInvocation invocation)
-        {
-            var result = GetLogDetail(invocation);
-            _loggerServiceBase.Info(
-                $"OnSuccess Method Name: {result}");
-        }
+        // protected override void OnSuccess(IInvocation invocation)
+        // {
+        //     var result = GetLogDetail(invocation);
+        //     _loggerServiceBase.Info(
+        //         $"OnSuccess Method Name: {result}");
+        // }
 
         // protected override void OnAfter(IInvocation invocation)
         //  {

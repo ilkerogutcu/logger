@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Reflection;
+using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
@@ -15,11 +16,12 @@ namespace Business.DependencyResolvers
             builder.RegisterType<EmployeeManager>().As<IEmployeeService>().SingleInstance();
             builder.RegisterType<ElasticSearchLogManager>().As<IElasticSearchLogService>().SingleInstance();
             builder.RegisterType<FileLogManager>().As<IFileLogService>().SingleInstance();
-            
-            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterType<MongoDbLogManager>().As<IMongoDbLogService>().SingleInstance();
+
+            var assembly = Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
-                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
