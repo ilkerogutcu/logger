@@ -30,13 +30,14 @@ namespace WebApplication.Controllers
             return await _elasticSearchLogService.GetLogsByDate(logDate, from, size);
         }
 
-        [HttpPost]
-        [Route("GetLogsByDateList")]
-        public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateList(DateTime startDate,
-            DateTime endDate,
-            int from = 0, int size = 10)
+        [HttpGet]
+        [Route("GetLogsByDateRange")]
+        public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
+            DateTime startDate, DateTime endDate, int from = 0, int size = 10)
         {
             return await _elasticSearchLogService.GetLogsByDateRange(startDate, endDate, from, size);
         }
+
+     
     }
 }

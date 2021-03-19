@@ -12,12 +12,10 @@ using Newtonsoft.Json;
 
 namespace Core.Aspects.Autofac
 {
-    [Serializable]
     public class LogAspect : MethodInterception //Aspect
     {
         private readonly LoggerServiceBase _loggerServiceBase;
         private readonly IHttpContextAccessor _httpContextAccessor;
-
 
         public LogAspect(Type loggerService)
         {
@@ -28,11 +26,11 @@ namespace Core.Aspects.Autofac
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
 
-        protected override void OnBefore(IInvocation invocation)
-        {
-            var result = GetLogDetail(invocation);
-            _loggerServiceBase.Info($"OnBefore: {result}");
-        }
+        // protected override void OnBefore(IInvocation invocation)
+        // {
+        //     var result = GetLogDetail(invocation);
+        //     _loggerServiceBase.Info($"OnBefore: {result}");
+        // }
 
         protected override void OnException(IInvocation invocation, Exception e)
         {

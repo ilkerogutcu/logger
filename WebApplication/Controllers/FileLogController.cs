@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Abstract;
-using Core.Aspects.Autofac;
-using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using Microsoft.AspNetCore.Mvc;
