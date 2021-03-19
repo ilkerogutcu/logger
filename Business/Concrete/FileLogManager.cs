@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
@@ -19,6 +21,7 @@ namespace Business.Concrete
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(ElasticsearchLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -53,6 +56,7 @@ namespace Business.Concrete
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(ElasticsearchLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);

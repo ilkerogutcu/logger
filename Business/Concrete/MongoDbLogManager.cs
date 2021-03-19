@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.DataAccess.MongoDb.Abstract;
 using Core.Entities.Concrete;
@@ -26,6 +28,7 @@ namespace Business.Concrete
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(ElasticsearchLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
             var min = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
@@ -39,6 +42,7 @@ namespace Business.Concrete
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(ElasticsearchLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
         {
             var min = new DateTime(logDate.Year, logDate.Month, logDate.Day, 0, 0, 0);
@@ -51,6 +55,7 @@ namespace Business.Concrete
         [LogAspect(typeof(FileLogger))]
         [LogAspect(typeof(ElasticsearchLogger))]
         [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
         {
             var result = (await _collection.FindAsync(x => true))

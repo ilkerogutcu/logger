@@ -25,7 +25,7 @@ namespace Core.Utilities.ElasticSearch
         public async Task<IResult> CreateNewIndexAsync(IndexModel indexModel)
         {
             var elasticClient = GetElasticClient(indexModel.IndexName);
-     
+
             if ((await elasticClient.Indices.ExistsAsync(indexModel.IndexName)).Exists)
                 return new Result(false, "Index already exists");
 
@@ -47,7 +47,7 @@ namespace Core.Utilities.ElasticSearch
             return new Result(response.IsValid,
                 response.IsValid ? "Success" : response.ServerError.Error.Reason);
         }
-
+        
         public async Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters) where T : class
         {
             var elasticClient = GetElasticClient(parameters.IndexName);

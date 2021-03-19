@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
-namespace Core.Aspects.Autofac
+namespace Core.Aspects.Autofac.Logger
 {
     public class LogAspect : MethodInterception //Aspect
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac;
+using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using Entities;
