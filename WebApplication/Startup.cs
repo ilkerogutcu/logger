@@ -3,13 +3,17 @@ using Core.DataAccess.MongoDb.Abstract;
 using Core.DataAccess.MongoDb.Concrete;
 using Core.DependencyResolvers;
 using Core.Extensions;
+using Core.Utilities.Encryption;
 using Core.Utilities.IoC;
+using Core.Utilities.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace WebApplication
@@ -38,6 +42,23 @@ namespace WebApplication
             services.AddTransient<FileLogger>();
             services.AddTransient<MongoDbLogger>();
             services.AddTransient<ElasticsearchLogger>();
+            var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters=new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidIssuer = tokenOptions.Issuer,
+                        ValidAudience = tokenOptions.Audience,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
+                    };
+                });
+            
             services.Configure<MongoDbSettings>(
                 Configuration.GetSection(nameof(MongoDbSettings)));
             services.AddSingleton<IMongoDbSettings>(sp =>
@@ -61,7 +82,7 @@ namespace WebApplication
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

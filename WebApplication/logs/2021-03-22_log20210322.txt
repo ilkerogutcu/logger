@@ -1,0 +1,1 @@
+2021-03-22 12:03:01.854 +03:00 [Error] OnException {"ExceptionMessage":"error","FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}

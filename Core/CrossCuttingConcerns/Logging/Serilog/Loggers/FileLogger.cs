@@ -20,13 +20,13 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
             string logFilePath = $"{Directory.GetCurrentDirectory() + logConfig.FolderPath}.txt";
 
             _logger = new LoggerConfiguration()
-                    .WriteTo.File(logFilePath,
+                .WriteTo.File(logFilePath,
                     rollingInterval: RollingInterval.Day,
                     retainedFileCountLimit: null,
                     fileSizeLimitBytes: 5000000,
                     outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level}] {Message}{NewLine}{Exception}")
-                    .WriteTo.Seq(logConfig.SeqConnectionString)
-                    .CreateLogger();
+                .WriteTo.Seq(logConfig.SeqConnectionString)
+                .CreateLogger();
         }
 
     }

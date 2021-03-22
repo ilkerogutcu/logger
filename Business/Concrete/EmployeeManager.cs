@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Aspects.Autofac;
 using Core.Aspects.Autofac.Logger;
@@ -13,8 +14,7 @@ namespace Business.Concrete
     public class EmployeeManager : IEmployeeService
     {
         [LogAspect(typeof(FileLogger))]
-        [LogAspect(typeof(MongoDbLogger))]
-        [LogAspect(typeof(ElasticsearchLogger))]
+        [SecuredOperation("admin")]
         public IDataResult<List<Employee>> GetAll()
         {
             return new SuccessDataResult<List<Employee>>(new List<Employee>

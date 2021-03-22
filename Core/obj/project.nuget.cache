@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xzZnxJiBWGyDKwMGUS02tK+w35kbnKFluFybSkCNeL2CENVDIzG0SuSVZPnhueW+nMTmBCO5TFHclhXWLVyi0A==",
+  "dgSpecHash": "A8TV782gXMMbkpFAoK5VgODoX6EnSmfu7x6SziW5SA9lq8N6XLoSQI215BZvq97KjRr2Q74KQ10R+07t2CSo0g==",
   "success": true,
   "projectFilePath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
   "expectedPackageFiles": [
@@ -53,7 +53,7 @@
     "C:\\Users\\olcsa\\.nuget\\packages\\mongodb.libmongocrypt\\1.2.0\\mongodb.libmongocrypt.1.2.0.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\nest\\7.11.1\\nest.7.11.1.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",
-    "C:\\Users\\olcsa\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\olcsa\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Users\\olcsa\\.nuget\\packages\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",

@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{484854A7-7B6A-43CD-A2D1-5916C176E00B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{CF8752F5-D7B0-4F53-81FF-8C7F022EC391}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{484854A7-7B6A-43CD-A2D1-5916C176E00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{484854A7-7B6A-43CD-A2D1-5916C176E00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{484854A7-7B6A-43CD-A2D1-5916C176E00B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8752F5-D7B0-4F53-81FF-8C7F022EC391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8752F5-D7B0-4F53-81FF-8C7F022EC391}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8752F5-D7B0-4F53-81FF-8C7F022EC391}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8752F5-D7B0-4F53-81FF-8C7F022EC391}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
