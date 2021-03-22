@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
-using Core.Aspects.Autofac;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
@@ -19,8 +18,6 @@ namespace Business.Concrete
     public class FileLogManager : IFileLogService
     {
         [LogAspect(typeof(FileLogger))]
-        [LogAspect(typeof(ElasticsearchLogger))]
-        [LogAspect(typeof(MongoDbLogger))]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
@@ -35,12 +32,11 @@ namespace Business.Concrete
             while (iterator.MoveNext())
             {
                 var item = iterator.Current.ToString("yyyy.MM.dd").Replace(".", "");
-                if (filePaths.Any(x => x.Substring(7, 8).Equals(item)))
-                {
-                    zip.AddFile($"./logs/{item}.txt", "Files");
-                }
+                var files = filePaths.FindAll(x => x.Substring(7, 8) == item);
+                if (files.Count > 0)
+                    files.ForEach(x => zip.AddFile($"{x}", "Files"));
             }
-            
+
             var zipName = $"Zip_{DateTime.Now:yyyy-MMM-dd-HHmmss}.zip";
             await using var memoryStream = new MemoryStream();
             zip.Save(memoryStream);
@@ -54,8 +50,6 @@ namespace Business.Concrete
         }
 
         [LogAspect(typeof(FileLogger))]
-        [LogAspect(typeof(ElasticsearchLogger))]
-        [LogAspect(typeof(MongoDbLogger))]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
@@ -78,8 +72,7 @@ namespace Business.Concrete
         }
 
         [LogAspect(typeof(FileLogger))]
-        [LogAspect(typeof(ElasticsearchLogger))]
-        [LogAspect(typeof(MongoDbLogger))]
+        [CacheAspect]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
             var filePaths = Directory.GetFiles("./logs/");
