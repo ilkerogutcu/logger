@@ -8204,19 +8204,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\olcsa\\.nuget\\packages\\": {}
+    "C:\\Users\\ilker\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\obj\\",
+      "projectPath": "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj",
+      "packagesPath": "C:\\Users\\ilker\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ilker\\Desktop\\logger\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ilker\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8318,7 +8318,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

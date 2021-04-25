@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Business.Abstract;
-using Business.BusinessAspects.Autofac;
 using Business.Constants;
-using Core.Aspects.Autofac;
 using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
@@ -14,7 +11,6 @@ namespace Business.Concrete
     public class EmployeeManager : IEmployeeService
     {
         [LogAspect(typeof(FileLogger))]
-        [SecuredOperation("admin")]
         public IDataResult<List<Employee>> GetAll()
         {
             return new SuccessDataResult<List<Employee>>(new List<Employee>

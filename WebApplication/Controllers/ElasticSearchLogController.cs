@@ -14,7 +14,7 @@ namespace WebApplication.Controllers
     public class ElasticSearchLogController : ControllerBase
     {
         private readonly IElasticSearchLogService _elasticSearchLogService;
-      
+
         public ElasticSearchLogController(IElasticSearchLogService elasticSearchLogService)
         {
             _elasticSearchLogService = elasticSearchLogService;
@@ -29,8 +29,7 @@ namespace WebApplication.Controllers
         {
             return await _elasticSearchLogService.GetLogsByDate(logDate, from, size);
         }
-        
-      
+
 
         [HttpGet]
         [Route("GetLogsByDateRange")]
@@ -39,7 +38,5 @@ namespace WebApplication.Controllers
         {
             return await _elasticSearchLogService.GetLogsByDateRange(startDate, endDate, from, size);
         }
-
-     
     }
 }

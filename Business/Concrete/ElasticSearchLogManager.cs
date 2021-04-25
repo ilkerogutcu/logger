@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
-using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logger;
@@ -26,7 +24,6 @@ namespace Business.Concrete
 
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         public async Task<IDataResult<IEnumerable<ElasticSearchGetModel<Log>>>> GetLogsByDate(DateTime logDate,
             int from = 0, int size = 10)
         {
@@ -39,7 +36,6 @@ namespace Business.Concrete
 
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
             DateTime startDate, DateTime endDate, int from = 0, int size = 10)
         {
@@ -56,7 +52,6 @@ namespace Business.Concrete
 
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         private async Task<List<ElasticSearchGetModel<Log>>> ElasticSearchGetModels(DateTime logDate, int from,
             int size)
         {

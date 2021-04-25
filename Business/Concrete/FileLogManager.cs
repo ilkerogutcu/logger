@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
-using Business.BusinessAspects.Autofac;
 using Business.Constants;
-using Core.Aspects.Autofac;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
@@ -21,7 +19,6 @@ namespace Business.Concrete
     {
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -36,9 +33,8 @@ namespace Business.Concrete
             {
                 var item = iterator.Current.ToString("yyyy.MM.dd").Replace(".", "");
                 var files = filePaths.FindAll(x => x.Substring(7, 8) == item);
-                if (files.Count>0) 
-                    files.ForEach(x=>zip.AddFile($"{x}", "Files"));
-                    
+                if (files.Count > 0)
+                    files.ForEach(x => zip.AddFile($"{x}", "Files"));
             }
 
             var zipName = $"Zip_{DateTime.Now:yyyy-MMM-dd-HHmmss}.zip";
@@ -55,7 +51,6 @@ namespace Business.Concrete
 
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
@@ -78,7 +73,6 @@ namespace Business.Concrete
 
         [LogAspect(typeof(FileLogger))]
         [CacheAspect]
-        [SecuredOperation("admin")]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
             var filePaths = Directory.GetFiles("./logs/");

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj": {}
+    "C:\\Users\\ilker\\Desktop\\logger\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
+    "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\obj\\",
+        "projectPath": "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\ilker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ilker\\Desktop\\logger\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ilker\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -116,21 +116,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj": {
+    "C:\\Users\\ilker\\Desktop\\logger\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\ilker\\Desktop\\logger\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\olcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Entities\\obj\\",
+        "projectPath": "C:\\Users\\ilker\\Desktop\\logger\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\ilker\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ilker\\Desktop\\logger\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\olcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ilker\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -144,8 +144,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\olcsa\\RiderProjects\\Logger\\Core\\Core.csproj"
+              "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\ilker\\Desktop\\logger\\Core\\Core.csproj"
               }
             }
           }
@@ -159,6 +159,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.Extensions.Identity.Stores": {
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.13, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -174,7 +180,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
