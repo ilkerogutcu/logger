@@ -51,12 +51,12 @@ namespace Core.CrossCuttingConcerns.Caching.Microsoft
             var cacheEntriesCollection = cacheEntriesCollectionDefinition?.GetValue(_memoryCache) as dynamic;
             var cacheCollectionValues = new List<ICacheEntry>();
 
-         
-                foreach (var cacheItem in cacheEntriesCollection)
-                {
-                    ICacheEntry cacheItemValue = cacheItem.GetType().GetProperty("Value").GetValue(cacheItem, null);
-                    cacheCollectionValues.Add(cacheItemValue);
-                }
+
+            foreach (var cacheItem in cacheEntriesCollection)
+            {
+                ICacheEntry cacheItemValue = cacheItem.GetType().GetProperty("Value").GetValue(cacheItem, null);
+                cacheCollectionValues.Add(cacheItemValue);
+            }
 
             var regex = new Regex(pattern, RegexOptions.Singleline | RegexOptions.Compiled | RegexOptions.IgnoreCase);
             var keysToRemove = cacheCollectionValues.Where(d => regex.IsMatch(d.Key.ToString())).Select(d => d.Key)

@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
-using Core.Entities.Concrete;
+using Core.Aspects.Autofac.Logger;
+using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-
+    [Route("api/employee")]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
@@ -20,9 +19,9 @@ namespace WebApplication.Controllers
             _employeeService = employeeService;
         }
 
-        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
-        [Route("GetEmployees")]
+        [Route("get-employees")]
+        [LogAspect(typeof(FileLogger))]
         public IDataResult<List<Employee>> Get()
         {
             return _employeeService.GetAll();

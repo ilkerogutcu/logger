@@ -1,10 +1,11 @@
-﻿using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
+﻿using System;
+using System.IO;
+using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Core.Utilities.IoC;
+using Core.Utilities.Messages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using System;
-using System.IO;
 
 namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
 {
@@ -12,12 +13,12 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
     {
         public FileLogger()
         {
-            IConfiguration configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
+            var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
 
             var logConfig = configuration.GetSection("SeriLogConfigurations:FileLogConfiguration")
-                .Get<FileLogConfiguration>() ?? throw new Exception(Utilities.Messages.SerilogMessages.NullOptionsMessage);
+                .Get<FileLogConfiguration>() ?? throw new Exception(SerilogMessages.NullOptionsMessage);
 
-            string logFilePath = $"{Directory.GetCurrentDirectory() + logConfig.FolderPath}.txt";
+            var logFilePath = $"{Directory.GetCurrentDirectory() + logConfig.FolderPath}.txt";
 
             _logger = new LoggerConfiguration()
                 .WriteTo.File(logFilePath,
@@ -28,6 +29,5 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
                 .WriteTo.Seq(logConfig.SeqConnectionString)
                 .CreateLogger();
         }
-
     }
 }

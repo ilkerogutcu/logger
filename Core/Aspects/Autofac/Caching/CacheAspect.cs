@@ -9,8 +9,8 @@ namespace Core.Aspects.Autofac.Caching
 {
     public class CacheAspect : MethodInterception
     {
-        private readonly int _duration;
         private readonly ICacheManager _cacheManager;
+        private readonly int _duration;
 
         public CacheAspect(int duration = 20)
         {
@@ -29,6 +29,7 @@ namespace Core.Aspects.Autofac.Caching
                 invocation.ReturnValue = _cacheManager.Get(key);
                 return;
             }
+
             invocation.Proceed();
             _cacheManager.Add(key, invocation.ReturnValue, _duration);
         }

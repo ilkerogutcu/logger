@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApplication.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/elastic-search-log")]
     public class ElasticSearchLogController : ControllerBase
     {
         private readonly IElasticSearchLogService _elasticSearchLogService;
@@ -22,7 +22,7 @@ namespace WebApplication.Controllers
 
 
         [HttpGet]
-        [Route("GetLogsByDate")]
+        [Route("get-logs-by-date")]
         public async Task<IDataResult<IEnumerable<ElasticSearchGetModel<Log>>>> GetLogsByDate(DateTime logDate,
             int size = 10,
             int from = 0)
@@ -32,7 +32,7 @@ namespace WebApplication.Controllers
 
 
         [HttpGet]
-        [Route("GetLogsByDateRange")]
+        [Route("get-logs-by-date-range")]
         public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
             DateTime startDate, DateTime endDate, int from = 0, int size = 10)
         {

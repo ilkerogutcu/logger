@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[9.5.1, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.11.1, )"
+            },
             "Microsoft.AspNetCore.Http": {
               "target": "Package",
               "version": "[2.2.2, )"
@@ -63,6 +67,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.11, )"
+            },
+            "MimeKit": {
+              "target": "Package",
+              "version": "[2.11.0, )"
             },
             "MongoDB.Driver": {
               "target": "Package",

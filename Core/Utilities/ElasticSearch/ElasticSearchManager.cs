@@ -47,7 +47,7 @@ namespace Core.Utilities.ElasticSearch
             return new Result(response.IsValid,
                 response.IsValid ? "Success" : response.ServerError.Error.Reason);
         }
-        
+
         public async Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters) where T : class
         {
             var elasticClient = GetElasticClient(parameters.IndexName);

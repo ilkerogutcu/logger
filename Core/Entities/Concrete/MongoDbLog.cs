@@ -5,11 +5,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Core.Entities.Concrete
 {
-    public class MongoDbLog:IEntity
+    public class MongoDbLog : IEntity
     {
-        [BsonId]
-        [DataMember]
-        public ObjectId _Id { get; set; }
+        [BsonId] [DataMember] public ObjectId _Id { get; set; }
 
         public DateTime Timestamp { get; set; }
         public string Level { get; set; }

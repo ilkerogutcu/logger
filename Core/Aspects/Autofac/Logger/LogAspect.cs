@@ -14,8 +14,8 @@ namespace Core.Aspects.Autofac.Logger
 {
     public class LogAspect : MethodInterception //Aspect
     {
-        private readonly LoggerServiceBase _loggerServiceBase;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly LoggerServiceBase _loggerServiceBase;
 
         public LogAspect(Type loggerService)
         {
@@ -75,7 +75,11 @@ namespace Core.Aspects.Autofac.Logger
                 Parameters = logParameters,
                 User = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?"
             };
-            return JsonConvert.SerializeObject(logDetail);
+            return JsonConvert.SerializeObject(logDetail, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
 
         private static List<LogParameter> GetLogParameters(IInvocation invocation)

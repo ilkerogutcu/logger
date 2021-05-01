@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace Core.Extensions
 {
-    public static class  ClaimsPrincipalExtensions
+    public static class ClaimsPrincipalExtensions
     {
         public static List<string> Claims(this ClaimsPrincipal claimsPrincipal, string claimType)
         {

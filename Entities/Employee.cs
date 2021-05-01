@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    public class Employee:IEntity
+    public class Employee : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

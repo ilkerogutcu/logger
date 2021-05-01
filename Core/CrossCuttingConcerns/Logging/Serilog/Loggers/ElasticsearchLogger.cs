@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Core.Utilities.IoC;
+using Core.Utilities.Messages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -13,10 +14,10 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
     {
         public ElasticsearchLogger()
         {
-            IConfiguration configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
-                
+            var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
+
             var logConfig = configuration.GetSection("SeriLogConfigurations:ElasticsearchConfiguration")
-                .Get<ElasticsearchConfiguration>() ?? throw new Exception(Utilities.Messages.SerilogMessages.NullOptionsMessage);
+                .Get<ElasticsearchConfiguration>() ?? throw new Exception(SerilogMessages.NullOptionsMessage);
 
             _logger = new LoggerConfiguration()
                 .WriteTo.Elasticsearch(
@@ -24,14 +25,13 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
                         new Uri(logConfig.ConnectionString))
                     {
                         CustomFormatter = new ExceptionAsObjectJsonFormatter(renderMessage: true),
-                        AutoRegisterTemplate = true,                                                
+                        AutoRegisterTemplate = true,
                         TemplateName = logConfig.TemplateName,
-                        IndexFormat = logConfig.IndexFormat          ,
+                        IndexFormat = logConfig.IndexFormat
                     })
                 .MinimumLevel.Verbose()
                 .WriteTo.Seq(logConfig.SeqConnectionString)
                 .CreateLogger();
         }
-    
     }
 }

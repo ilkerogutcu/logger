@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApplication.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/file-log")]
     public class FileLogController : ControllerBase
     {
         private readonly IFileLogService _fileLogService;
@@ -20,7 +20,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        [Route("GetLogsByDate")]
+        [Route("get-logs-by-date")]
         public async Task<FileContentResult> GetLogsByDate(DateTime logDate)
         {
             var file = _fileLogService.GetLogsByDate(logDate).Result;
@@ -28,7 +28,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        [Route("GetLogsByDateRange")]
+        [Route("get-logs-by-date-range")]
         public async Task<FileContentResult> GetLogsByDateRange(DateTime startDate, DateTime endDate)
         {
             var file = _fileLogService.GetLogFilesByDateRange(startDate, endDate).Result;
@@ -36,7 +36,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllLogs")]
+        [Route("get-all-logs")]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
             return _fileLogService.GetAllLogs();
