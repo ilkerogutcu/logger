@@ -1,30 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Business.Abstract;
 using Core.Aspects.Autofac.Logger;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
-using Core.Entities.Concrete;
 using Core.Utilities.Results;
-using Entities;
 using Entities.DTOs;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace WebApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private IAuthenticationService _authenticationService;
+        private readonly IAuthenticationService _authenticationService;
 
         public AuthController(IAuthenticationService authenticationService)
         {
@@ -32,25 +20,34 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        [Route("Register")]
+        [Route("register")]
         public Task<IResult> Register([FromBody] UserForRegisterDto model)
         {
-            return _authenticationService.Register(model);
+            return _authenticationService.Register(model, Url.Content("~/auth/confirm-mail"));
         }
 
         [HttpPost]
-        [Route("RegisterAdmin")]
+        [Route("register-admin")]
         public Task<IResult> RegisterAdmin([FromBody] UserForRegisterDto model)
         {
-            return _authenticationService.RegisterAdmin(model);
+            return _authenticationService.RegisterAdmin(model, Url.Content("~/auth/confirm-mail"));
         }
 
         [HttpPost]
-        [Route("Login")]
+        [Route("login")]
         [LogAspect(typeof(FileLogger))]
         public Task<IDataResult<TokenResponseDto>> Login([FromBody] UserForLoginDto model)
         {
             return _authenticationService.Login(model);
+        }
+
+
+        [HttpPost]
+        [Route("confirm-mail")]
+        [LogAspect(typeof(FileLogger))]
+        public Task<IResult> ConfirmMail(string token, string email)
+        {
+            return _authenticationService.ConfirmEmail(token, email);
         }
     }
 }

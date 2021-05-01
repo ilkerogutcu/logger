@@ -2,6 +2,7 @@ using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.DataAccess.MongoDb.Abstract;
 using Core.DataAccess.MongoDb.Concrete;
 using Core.DependencyResolvers;
+using Core.Entities.Concrete;
 using Core.Extensions;
 using Core.Utilities.Encryption;
 using Core.Utilities.IoC;
@@ -47,7 +48,15 @@ namespace WebApplication
 
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
-            
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+            });
+
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -66,8 +75,8 @@ namespace WebApplication
                         ValidIssuer = Configuration["TokenOptions:Issuer"],
                         ValidAudience = Configuration["TokenOptions:Audience"],
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(Configuration["TokenOptions:SecurityKey"])
-                        
+                        IssuerSigningKey =
+                            SecurityKeyHelper.CreateSecurityKey(Configuration["TokenOptions:SecurityKey"])
                     };
                 });
 
@@ -92,11 +101,11 @@ namespace WebApplication
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            
+
             //Authentication comes before Authorization.
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseStatusCodePages();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

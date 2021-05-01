@@ -13,7 +13,7 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-            using var context=new TContext();
+            using var context = new TContext();
             var addedEntity = context.Entry(entity);
             addedEntity.State = EntityState.Added;
             context.SaveChanges();

@@ -231,3 +231,6 @@ C:\Users\ilker\Desktop\logger\WebApplication\obj\Debug\net5.0\WebApplication.dll
 C:\Users\ilker\Desktop\logger\WebApplication\obj\Debug\net5.0\ref\WebApplication.dll
 C:\Users\ilker\Desktop\logger\WebApplication\obj\Debug\net5.0\WebApplication.pdb
 C:\Users\ilker\Desktop\logger\WebApplication\obj\Debug\net5.0\WebApplication.genruntimeconfig.cache
+C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\MailKit.dll
+C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\MimeKit.dll
+C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\BouncyCastle.Crypto.dll

@@ -7,7 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Business.Constants;
+using Core.Aspects.Autofac.Logger;
+using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Entities.Concrete;
+using Core.Utilities.Mail;
 using Core.Utilities.Results;
 using Entities;
 using Entities.DTOs;
@@ -20,18 +23,21 @@ namespace Business.Concrete
     public class AuthenticationManager : IAuthenticationService
     {
         private readonly IConfiguration _configuration;
+        private readonly IMailService _mailService;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public AuthenticationManager(IConfiguration configuration, RoleManager<IdentityRole> roleManager,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, IMailService mailService)
         {
             _configuration = configuration;
             _roleManager = roleManager;
             _userManager = userManager;
+            _mailService = mailService;
         }
 
-        public async Task<IResult> Register(UserForRegisterDto model)
+        [LogAspect(typeof(FileLogger))]
+        public async Task<IResult> Register(UserForRegisterDto model, string url)
         {
             if (await _userManager.FindByNameAsync(model.Username) != null)
                 return new ErrorResult(Messages.UserAlreadyExist);
@@ -44,13 +50,16 @@ namespace Business.Concrete
                 LastName = model.LastName
             };
             var result = await _userManager.CreateAsync(user, model.Password);
+            await SendEmailForConfirmation(user, url);
+            await _userManager.AddToRolesAsync(user, new List<string> {UserRoles.User});
 
             return !result.Succeeded
                 ? new ErrorResult(Messages.FailedToRegisterNewUser)
                 : new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
-        public async Task<IResult> RegisterAdmin(UserForRegisterDto model)
+        [LogAspect(typeof(FileLogger))]
+        public async Task<IResult> RegisterAdmin(UserForRegisterDto model, string url)
         {
             if (await _userManager.FindByNameAsync(model.Username) != null)
                 return new ErrorResult(Messages.UserAlreadyExist);
@@ -75,6 +84,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
+        [LogAspect(typeof(FileLogger))]
         public async Task<IDataResult<TokenResponseDto>> Login(UserForLoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
@@ -90,6 +100,7 @@ namespace Business.Concrete
             authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
             var authSigninKey =
                 new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["TokenOptions:SecurityKey"]));
+
             var token = new JwtSecurityToken(
                 _configuration["TokenOptions:Issuer"],
                 _configuration["TokenOptions:Audience"],
@@ -103,6 +114,31 @@ namespace Business.Concrete
                 Token = new JwtSecurityTokenHandler().WriteToken(token),
                 ValidTo = token.ValidTo.ToString("yyyy-MM-ddThh:mm:ss")
             }, Messages.TokenCreatedSuccessfully);
+        }
+
+        [LogAspect(typeof(FileLogger))]
+        public async Task<IResult> ConfirmEmail(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return new ErrorResult(Messages.UserNotFound);
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            return result.Succeeded
+                ? new SuccessResult(Messages.EmailSuccessfullyConfirmed)
+                : new ErrorResult(Messages.ErrorVerifyingMail);
+        }
+
+        [LogAspect(typeof(FileLogger))]
+        private async Task SendEmailForConfirmation(ApplicationUser user, string url)
+        {
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+            var confirmationLink = $"{url}?token={token}&email={user.Email}";
+            await _mailService.SendEmailAsync(new MailRequest
+            {
+                ToEmail = user.Email,
+                Subject = "Confirm your mail!",
+                Body = confirmationLink
+            });
         }
     }
 }

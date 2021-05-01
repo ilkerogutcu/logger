@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework.Contexts
 {
-    public class ApplicationDbContext:IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -1,5 +1,4 @@
-﻿
-namespace Core.Utilities.Messages
+﻿namespace Core.Utilities.Messages
 {
     public static class AspectMessages
     {
