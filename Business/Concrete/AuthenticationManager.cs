@@ -25,15 +25,18 @@ namespace Business.Concrete
         private readonly IConfiguration _configuration;
         private readonly IMailService _mailService;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public AuthenticationManager(IConfiguration configuration, RoleManager<IdentityRole> roleManager,
-            UserManager<ApplicationUser> userManager, IMailService mailService)
+            UserManager<ApplicationUser> userManager, IMailService mailService,
+            SignInManager<ApplicationUser> signInManager)
         {
             _configuration = configuration;
             _roleManager = roleManager;
             _userManager = userManager;
             _mailService = mailService;
+            _signInManager = signInManager;
         }
 
         [LogAspect(typeof(FileLogger))]
@@ -84,30 +87,18 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
-        [LogAspect(typeof(FileLogger))]
         public async Task<IDataResult<TokenResponseDto>> Login(UserForLoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 return new ErrorDataResult<TokenResponseDto>(Messages.FailedToCreateToken);
-            var userRoles = await _userManager.GetRolesAsync(user);
-            var authClaims = new List<Claim>
-            {
-                new(ClaimTypes.Name, user.UserName),
-                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-            authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
-            var authSigninKey =
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["TokenOptions:SecurityKey"]));
+            await _signInManager.SignOutAsync();
+            var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password,
+                false, false);
+            if (!signInResult.Succeeded) return new ErrorDataResult<TokenResponseDto>(Messages.SignInFailed);
 
-            var token = new JwtSecurityToken(
-                _configuration["TokenOptions:Issuer"],
-                _configuration["TokenOptions:Audience"],
-                expires: DateTime.Now.AddDays(1),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha512Signature)
-            );
+            var token = await GenerateJwtSecurityToken(user);
 
             return new SuccessDataResult<TokenResponseDto>(new TokenResponseDto
             {
@@ -125,6 +116,27 @@ namespace Business.Concrete
             return result.Succeeded
                 ? new SuccessResult(Messages.EmailSuccessfullyConfirmed)
                 : new ErrorResult(Messages.ErrorVerifyingMail);
+        }
+
+        private async Task<JwtSecurityToken> GenerateJwtSecurityToken(ApplicationUser user)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var authClaims = new List<Claim>
+            {
+                new(ClaimTypes.Name, user.UserName),
+                new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+            authClaims.AddRange(userRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole)));
+            var authSigninKey =
+                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["TokenOptions:SecurityKey"]));
+
+            return new JwtSecurityToken(
+                _configuration["TokenOptions:Issuer"],
+                _configuration["TokenOptions:Audience"],
+                expires: DateTime.Now.AddDays(1),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha512Signature)
+            );
         }
 
         [LogAspect(typeof(FileLogger))]

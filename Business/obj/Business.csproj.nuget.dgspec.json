@@ -62,6 +62,14 @@
               "target": "Package",
               "version": "[1.9.1.8, )"
             },
+            "Microsoft.AspNetCore.Authorization": {
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.13, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "System.Text.Encoding.CodePages": {
               "target": "Package",
               "version": "[6.0.0-preview.2.21154.6, )"

@@ -6,6 +6,8 @@
         public const string LogsListed = "Logs Listed.";
         public const string LogsNotListed = "Logs not Listed!";
         public const string UserAlreadyExist = "User already exist!";
+        public const string SignInFailed = "Sign in failed!";
+
         public const string UserNotFound = "User not found!";
         public const string FailedToRegisterNewUser = "Failed to register new user!";
         public const string UserCreatedSuccessfully = "User created successfully.";
