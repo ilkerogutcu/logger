@@ -62,8 +62,12 @@ namespace Core.Aspects.Autofac.Logger
                 User = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?",
                 ExceptionMessage = e.Message
             };
-            return JsonConvert.SerializeObject(logDetail);
-        }
+            return JsonConvert.SerializeObject(logDetail, Formatting.None, 
+                new JsonSerializerSettings() 
+                { 
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore, 
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat
+                });   }
 
         private string GetLogDetail(IInvocation invocation)
         {

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "FRREEqSJ08erakDoXmC8crRTR+t7VP4w2PazSytBfdt43RjLgqLcrtEyjW0ERYaOzRgaNzHdI6OO5YtwkRXHUA==",
+  "dgSpecHash": "tqF3W31AvfIom8x3rB3/4a9hqy3mpOGYpTLLLgPiILn0fdRkzPurp3wrV4mYJhdwmp7bwCmN9hxcnqzG5l7kOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\ilker\\Desktop\\logger\\WebApplication\\WebApplication.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.4\\microsoft.aspnetcore.authentication.jwtbearer.5.0.4.nupkg.sha512",
+    "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.0-preview.3.21201.13\\microsoft.aspnetcore.authorization.6.0.0-preview.3.21201.13.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0-preview.3.21201.13\\microsoft.aspnetcore.cryptography.internal.6.0.0-preview.3.21201.13.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0-preview.3.21201.13\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0-preview.3.21201.13.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.2.0\\microsoft.aspnetcore.dataprotection.2.2.0.nupkg.sha512",
@@ -31,6 +32,7 @@
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.identity\\2.2.0\\microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.0-preview.3.21201.13\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.metadata\\6.0.0-preview.3.21201.13\\microsoft.aspnetcore.metadata.6.0.0-preview.3.21201.13.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.2.0\\microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.csharp\\4.6.0\\microsoft.csharp.4.6.0.nupkg.sha512",
     "C:\\Users\\ilker\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.2\\microsoft.data.sqlclient.2.1.2.nupkg.sha512",

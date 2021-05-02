@@ -234,3 +234,5 @@ C:\Users\ilker\Desktop\logger\WebApplication\obj\Debug\net5.0\WebApplication.gen
 C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\MailKit.dll
 C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\MimeKit.dll
 C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\ilker\Desktop\logger\WebApplication\bin\Debug\net5.0\Microsoft.AspNetCore.Metadata.dll
