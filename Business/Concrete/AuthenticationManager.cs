@@ -52,8 +52,12 @@ namespace Business.Concrete
                 FirstName = model.FirstName,
                 LastName = model.LastName
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
             await SendEmailForConfirmation(user, url);
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
             await _userManager.AddToRolesAsync(user, new List<string> {UserRoles.User});
 
             return !result.Succeeded
@@ -87,24 +91,36 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
+        [LogAspect(typeof(FileLogger))]
         public async Task<IDataResult<TokenResponseDto>> Login(UserForLoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
 
+            var result = await _userManager.CheckPasswordAsync(user, model.Password);
             if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
                 return new ErrorDataResult<TokenResponseDto>(Messages.FailedToCreateToken);
+            if (!result) return new ErrorDataResult<TokenResponseDto>(Messages.SignInFailed);
             await _signInManager.SignOutAsync();
+            var token = await GenerateJwtSecurityToken(user);
+  
             var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password,
                 false, false);
-            if (!signInResult.Succeeded) return new ErrorDataResult<TokenResponseDto>(Messages.SignInFailed);
+            
+            if (!signInResult.RequiresTwoFactor)
+                return new SuccessDataResult<TokenResponseDto>(new TokenResponseDto
+                {
+                    Token = new JwtSecurityTokenHandler().WriteToken(token),
+                    ValidTo = token.ValidTo.ToString("yyyy-MM-ddThh:mm:ss")
+                }, Messages.TokenCreatedSuccessfully);
+            await SendTwoFactorToken(user.Email);
+            return new ErrorDataResult<TokenResponseDto>(Messages.RequiredTwoFactoryCode);
 
-            var token = await GenerateJwtSecurityToken(user);
+        }
 
-            return new SuccessDataResult<TokenResponseDto>(new TokenResponseDto
-            {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
-                ValidTo = token.ValidTo.ToString("yyyy-MM-ddThh:mm:ss")
-            }, Messages.TokenCreatedSuccessfully);
+        [LogAspect(typeof(FileLogger))]
+        public async void SignOut()
+        {
+            await _signInManager.SignOutAsync();
         }
 
         [LogAspect(typeof(FileLogger))]
@@ -118,6 +134,49 @@ namespace Business.Concrete
                 : new ErrorResult(Messages.ErrorVerifyingMail);
         }
 
+        [LogAspect(typeof(FileLogger))]
+        public async Task<IResult> EnableTwoFactorSecurity(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            user.TwoFactorEnabled = true;
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded
+                ? new SuccessResult(Messages.UpdatedUserSuccessfully)
+                : new ErrorResult(Messages.FailedToUpdateUser);
+        }
+
+        [LogAspect(typeof(FileLogger))]
+        public async Task<IResult> DisableTwoFactorSecurity(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            user.TwoFactorEnabled = false;
+            var result = await _userManager.UpdateAsync(user);
+            return result.Succeeded
+                ? new SuccessResult(Messages.UpdatedUserSuccessfully)
+                : new ErrorResult(Messages.FailedToUpdateUser);
+        }
+
+        public async Task<IResult> LoginWithTwoFactorSecurity(string code)
+        {
+            var result = await _signInManager.TwoFactorSignInAsync("Email", code, false, false);
+            return result.Succeeded
+                ? new SuccessResult(Messages.SignInSuccessfully)
+                : new ErrorResult(Messages.SignInFailed);
+        }
+
+        private async Task SendTwoFactorToken(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            var token = await _userManager.GenerateTwoFactorTokenAsync(user, "Email");
+            await _mailService.SendEmailAsync(new MailRequest
+            {
+                ToEmail = user.Email,
+                Subject = $"Your code:{token}",
+                Body = $"<p style='text-align:center;'>Your code:{token}</p>" + Messages.HtmlDontShareVerificationToken
+            });
+        }
+
+        [LogAspect(typeof(FileLogger))]
         private async Task<JwtSecurityToken> GenerateJwtSecurityToken(ApplicationUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);

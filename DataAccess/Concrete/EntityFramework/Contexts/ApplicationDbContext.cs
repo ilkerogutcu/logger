@@ -8,7 +8,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-9JI7HVR;Database=logger;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-CQ5O8N7;Database=logger;Trusted_Connection=True;");
         }
     }
 }
