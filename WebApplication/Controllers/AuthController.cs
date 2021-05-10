@@ -35,7 +35,6 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [Route("login")]
-        [LogAspect(typeof(FileLogger))]
         public Task<IDataResult<TokenResponseDto>> Login([FromBody] UserForLoginDto model)
         {
             return _authenticationService.Login(model);
@@ -43,7 +42,6 @@ namespace WebApplication.Controllers
         
         [HttpPost]
         [Route("sign-out")]
-        [LogAspect(typeof(FileLogger))]
         public new void SignOut()
         {
             _authenticationService.SignOut();
@@ -52,7 +50,6 @@ namespace WebApplication.Controllers
 
         [HttpPost]
         [Route("confirm-mail")]
-        [LogAspect(typeof(FileLogger))]
         public Task<IResult> ConfirmMail(string token, string email)
         {
             return _authenticationService.ConfirmEmail(token, email);
@@ -60,7 +57,6 @@ namespace WebApplication.Controllers
         
         [HttpPost]
         [Route("enable-two-factor-security")]
-        [LogAspect(typeof(FileLogger))]
         public Task<IResult> EnableTwoFactorSecurity(string id)
         {
             return _authenticationService.EnableTwoFactorSecurity(id);
@@ -68,7 +64,6 @@ namespace WebApplication.Controllers
         
         [HttpPost]
         [Route("disable-two-factor-security")]
-        [LogAspect(typeof(FileLogger))]
         public Task<IResult> DisableTwoFactorSecurity(string id)
         {
             return _authenticationService.DisableTwoFactorSecurity(id);
@@ -76,7 +71,6 @@ namespace WebApplication.Controllers
         
         [HttpPost]
         [Route("login-with-two-factor-security")]
-        [LogAspect(typeof(FileLogger))]
         public Task<IResult> LoginWithTwoFactorSecurity(string code)
         {
             return _authenticationService.LoginWithTwoFactorSecurity(code);

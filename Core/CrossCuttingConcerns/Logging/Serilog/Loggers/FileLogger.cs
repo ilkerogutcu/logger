@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Core.Utilities.IoC;
 using Core.Utilities.Messages;
@@ -18,7 +17,7 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
             var logConfig = configuration.GetSection("SeriLogConfigurations:FileLogConfiguration")
                 .Get<FileLogConfiguration>() ?? throw new Exception(SerilogMessages.NullOptionsMessage);
 
-            var logFilePath = $"{Directory.GetCurrentDirectory() + logConfig.FolderPath}.txt";
+            var logFilePath = $"{logConfig.FolderPath}/";
 
             _logger = new LoggerConfiguration()
                 .WriteTo.File(logFilePath,
@@ -30,4 +29,5 @@ namespace Core.CrossCuttingConcerns.Logging.Serilog.Loggers
                 .CreateLogger();
         }
     }
+    
 }
