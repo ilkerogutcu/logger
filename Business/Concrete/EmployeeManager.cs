@@ -12,7 +12,7 @@ namespace Business.Concrete
 {
     public class EmployeeManager : IEmployeeService
     {
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(ElasticsearchLogger),"PusulaRegister")]
         public IDataResult<List<Employee>> GetAll()
         {
             return new SuccessDataResult<List<Employee>>(new List<Employee>
@@ -32,6 +32,13 @@ namespace Business.Concrete
                     Salary = 2000
                 }
             }, Messages.EmployeesListed);
+        }
+
+        [LogAspect(typeof(ElasticsearchLogger),"Update")]
+        public IDataResult<Employee> Update(Employee employee)
+        {
+            employee.Lastname = "öğütcü";
+            return new SuccessDataResult<Employee>(employee,Messages.EmployeesListed);
         }
     }
 }

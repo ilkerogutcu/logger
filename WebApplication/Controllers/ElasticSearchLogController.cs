@@ -5,6 +5,7 @@ using Business.Abstract;
 using Core.Entities.Concrete;
 using Core.Utilities.ElasticSearch.Models;
 using Core.Utilities.Results;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
@@ -37,6 +38,14 @@ namespace WebApplication.Controllers
             DateTime startDate, DateTime endDate, int from = 0, int size = 10)
         {
             return await _elasticSearchLogService.GetLogsByDateRange(startDate, endDate, from, size);
+        }
+
+        [HttpPost]
+        [Route("get-search-by-field")]
+        public async Task<IDataResult<List<ElasticSearchGetModel<Log>>>> GetSearchByField(
+            ElasticSearchRequestDto elasticSearchRequestDto)
+        {
+            return await _elasticSearchLogService.GetSearchByField(elasticSearchRequestDto);
         }
     }
 }

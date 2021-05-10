@@ -23,11 +23,17 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("get-employees")]
-        [Authorize(Roles = UserRoles.Admin)]
-        [LogAspect(typeof(FileLogger))]
+       // [Authorize(Roles = UserRoles.Admin)]
         public IDataResult<List<Employee>> Get()
         {
             return _employeeService.GetAll();
         }
+       [HttpPost]
+       [Route("update-employee")]
+       // [Authorize(Roles = UserRoles.Admin)]
+       public IDataResult<Employee> Update(Employee employee)
+       {
+           return _employeeService.Update(employee);
+       }
     }
 }

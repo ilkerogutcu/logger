@@ -8,16 +8,22 @@ using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logger;
+using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Entities.Concrete;
+using Core.Utilities.IoC;
+using Core.Utilities.Messages;
 using Core.Utilities.Results;
 using Ionic.Zip;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 
 namespace Business.Concrete
 {
     public class FileLogManager : IFileLogService
     {
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
@@ -26,7 +32,8 @@ namespace Business.Concrete
             using var iterator = Utilities.GetDateRange(startDate, endDate).GetEnumerator();
 
             using var zip = new ZipFile {AlternateEncodingUsage = ZipOption.AsNecessary};
-            var filePaths = Directory.GetFiles("./logs/").ToList();
+            
+            var filePaths = Directory.GetFiles(GetFilePath()).ToList();
             zip.AddDirectoryByName("Files");
 
             while (iterator.MoveNext())
@@ -49,7 +56,7 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
@@ -58,7 +65,7 @@ namespace Business.Concrete
 
             using var zip = new ZipFile {AlternateEncodingUsage = ZipOption.AsNecessary};
             zip.AddDirectoryByName("Files");
-            zip.AddFile($"./logs/{fileName}.txt", "Files");
+            zip.AddFile($"./{GetFilePath()}/{fileName}.txt", "Files");
             var zipName = $"Zip_{DateTime.Now:yyyy-MMM-dd-HHmmss}.zip";
             await using var memoryStream = new MemoryStream();
             zip.Save(memoryStream);
@@ -71,11 +78,11 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
-            var filePaths = Directory.GetFiles("./logs/");
+            var filePaths = Directory.GetFiles(GetFilePath());
             var files = new List<FileModel>();
             foreach (var filePath in filePaths)
                 files.Add(new FileModel
@@ -85,6 +92,12 @@ namespace Business.Concrete
                 });
 
             return new SuccessDataResult<List<FileModel>>(files, Messages.LogsListed);
+        }
+
+        private static string GetFilePath()
+        {
+            var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
+            return  configuration?.GetSection("SeriLogConfigurations:FileLogConfiguration:FolderPath").Value;
         }
 
         /*[LogAspect(typeof(FileLogger))]

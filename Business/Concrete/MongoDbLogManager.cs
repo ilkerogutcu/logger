@@ -24,7 +24,7 @@ namespace Business.Concrete
             _collection = database.GetCollection<MongoDbLog>(settings.CollectionName);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
@@ -36,7 +36,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
         {
@@ -47,7 +47,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger),"PusulaRegister")]
         [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
         {
