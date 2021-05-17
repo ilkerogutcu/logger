@@ -9,6 +9,7 @@ using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.DataAccess.MongoDb.Abstract;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Entities.DTOs;
 using MongoDB.Driver;
 
 namespace Business.Concrete
@@ -36,6 +37,16 @@ namespace Business.Concrete
 
             var result = await _collection
                 .FindAsync(x => (x.Timestamp > min) & (x.Timestamp < max)).Result.ToListAsync();
+            return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
+        }
+
+        [LogAspect(typeof(FileLogger), "FilterLogs")]
+        public async Task<IDataResult<List<MongoDbLog>>> GetFilteredLogs(MongoLogSearchRequestDto searchRequestDto)
+        {
+            var result = await _collection.FindAsync(x =>
+                    x.MessageTemplate.StartsWith(
+                        $"Project: {searchRequestDto.ProjectName} Key: {searchRequestDto.Key}"))
+                .Result.ToListAsync();
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 

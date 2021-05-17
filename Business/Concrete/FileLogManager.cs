@@ -8,22 +8,19 @@ using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Logger;
-using Core.CrossCuttingConcerns.Logging.Serilog.ConfigurationModels;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Entities.Concrete;
 using Core.Utilities.IoC;
-using Core.Utilities.Messages;
 using Core.Utilities.Results;
 using Ionic.Zip;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace Business.Concrete
 {
     public class FileLogManager : IFileLogService
     {
-        [LogAspect(typeof(FileLogger),"PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
@@ -32,7 +29,7 @@ namespace Business.Concrete
             using var iterator = Utilities.GetDateRange(startDate, endDate).GetEnumerator();
 
             using var zip = new ZipFile {AlternateEncodingUsage = ZipOption.AsNecessary};
-            
+
             var filePaths = Directory.GetFiles(GetFilePath()).ToList();
             zip.AddDirectoryByName("Files");
 
@@ -56,7 +53,7 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger),"PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
@@ -78,7 +75,7 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger),"PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
@@ -97,7 +94,7 @@ namespace Business.Concrete
         private static string GetFilePath()
         {
             var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
-            return  configuration?.GetSection("SeriLogConfigurations:FileLogConfiguration:FolderPath").Value;
+            return configuration?.GetSection("SeriLogConfigurations:FileLogConfiguration:FolderPath").Value;
         }
 
         /*[LogAspect(typeof(FileLogger))]

@@ -1,7 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Business.Abstract;
-using Core.Aspects.Autofac.Logger;
-using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +37,7 @@ namespace WebApplication.Controllers
         {
             return _authenticationService.Login(model);
         }
-        
+
         [HttpPost]
         [Route("sign-out")]
         public new void SignOut()
@@ -54,21 +52,21 @@ namespace WebApplication.Controllers
         {
             return _authenticationService.ConfirmEmail(token, email);
         }
-        
+
         [HttpPost]
         [Route("enable-two-factor-security")]
         public Task<IResult> EnableTwoFactorSecurity(string id)
         {
             return _authenticationService.EnableTwoFactorSecurity(id);
         }
-        
+
         [HttpPost]
         [Route("disable-two-factor-security")]
         public Task<IResult> DisableTwoFactorSecurity(string id)
         {
             return _authenticationService.DisableTwoFactorSecurity(id);
         }
-        
+
         [HttpPost]
         [Route("login-with-two-factor-security")]
         public Task<IResult> LoginWithTwoFactorSecurity(string code)

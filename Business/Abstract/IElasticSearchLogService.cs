@@ -16,6 +16,7 @@ namespace Business.Abstract
         public Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
             DateTime startDate, DateTime endDate, int from = 0, int size = 10);
 
-        public Task<IDataResult<List<ElasticSearchGetModel<Log>>>> GetSearchByField( ElasticSearchRequestDto elasticSearchRequestDto);
+        public Task<IDataResult<List<ElasticSearchGetModel<Log>>>> GetSearchByField(
+            ElasticSearchRequestDto elasticSearchRequestDto);
     }
 }
