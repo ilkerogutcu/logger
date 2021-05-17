@@ -8,6 +8,5 @@ namespace Business.Abstract
     {
         public IDataResult<List<Employee>> GetAll();
         public IDataResult<Employee> Update(Employee employee);
-
     }
 }

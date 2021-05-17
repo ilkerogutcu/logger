@@ -18,7 +18,8 @@
         public const string ErrorVerifyingMail = "There was an error verifying email!";
         public const string FailedToUpdateUser = "Failed to update user!";
         public const string UpdatedUserSuccessfully = "User updated succesfully.";
-        public const string HtmlDontShareVerificationToken = "<p style='text-align:center'><strong>You should never share your verification code with others.</strong></p>";
 
+        public const string HtmlDontShareVerificationToken =
+            "<p style='text-align:center'><strong>You should never share your verification code with others.</strong></p>";
     }
 }

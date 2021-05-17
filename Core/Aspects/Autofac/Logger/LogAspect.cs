@@ -17,9 +17,9 @@ namespace Core.Aspects.Autofac.Logger
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoggerServiceBase _loggerServiceBase;
-        private string _keyValue;
+        private readonly string _keyValue;
 
-        public LogAspect(Type loggerService,string key)
+        public LogAspect(Type loggerService, string key)
         {
             if (loggerService.BaseType != typeof(LoggerServiceBase))
                 throw new ArgumentException(AspectMessages.WrongLoggerType);
@@ -28,11 +28,11 @@ namespace Core.Aspects.Autofac.Logger
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
 
-         protected override void OnBefore(IInvocation invocation)
-         {
-             var result = GetLogDetail(invocation);
-             _loggerServiceBase.Info($"Project: {GetProjectName()} Key: {_keyValue} OnBefore: {result}");
-         }
+        protected override void OnBefore(IInvocation invocation)
+        {
+            var result = GetLogDetail(invocation);
+            _loggerServiceBase.Info($"Project: {GetProjectName()} Key: {_keyValue} OnBefore: {result}");
+        }
 
         protected override void OnException(IInvocation invocation, Exception e)
         {
@@ -64,12 +64,13 @@ namespace Core.Aspects.Autofac.Logger
                 User = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?",
                 ExceptionMessage = e.Message
             };
-            return JsonConvert.SerializeObject(logDetail, Formatting.None, 
-                new JsonSerializerSettings() 
-                { 
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore, 
+            return JsonConvert.SerializeObject(logDetail, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                     DateFormatHandling = DateFormatHandling.IsoDateFormat
-                });   }
+                });
+        }
 
         private string GetLogDetail(IInvocation invocation)
         {
@@ -101,11 +102,11 @@ namespace Core.Aspects.Autofac.Logger
                 });
             return logParameters;
         }
+
         private static string GetProjectName()
         {
             var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
-            return  configuration?.GetSection("SeriLogConfigurations:ProjectName").Value;
+            return configuration?.GetSection("SeriLogConfigurations:ProjectName").Value;
         }
-
     }
 }

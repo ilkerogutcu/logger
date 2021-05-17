@@ -14,6 +14,5 @@ namespace Business.Abstract
         Task<IResult> EnableTwoFactorSecurity(string id);
         Task<IResult> DisableTwoFactorSecurity(string id);
         Task<IResult> LoginWithTwoFactorSecurity(string code);
-
     }
 }
