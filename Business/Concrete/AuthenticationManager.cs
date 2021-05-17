@@ -54,11 +54,16 @@ namespace Business.Concrete
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+                return !result.Succeeded
+                    ? new ErrorResult(result.Errors.ToList()[0].Description)
+                    : new SuccessResult(Messages.UserCreatedSuccessfully);
             await SendEmailForConfirmation(user, url);
-
+                
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
             await _userManager.AddToRolesAsync(user, new List<string> {UserRoles.User});
+
 
             return !result.Succeeded
                 ? new ErrorResult(Messages.FailedToRegisterNewUser)
