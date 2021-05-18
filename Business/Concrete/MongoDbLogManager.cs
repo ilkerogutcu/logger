@@ -9,6 +9,7 @@ using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.DataAccess.MongoDb.Abstract;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Entities.DTOs;
 using MongoDB.Driver;
 
 namespace Business.Concrete
@@ -24,32 +25,45 @@ namespace Business.Concrete
             _collection = database.GetCollection<MongoDbLog>(settings.CollectionName);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
-        public async Task<IDataResult<List<MongoDbLog>>> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
+        public async Task<IDataResult<List<MongoDbLog>>> GetLogs(DateTime startDate, DateTime endDate)
         {
+            if (startDate != default && endDate == default) return await GetLogsByDate(startDate);
+            if (startDate == default || endDate == default) return await GetAllLogs();
+
             var min = new DateTime(startDate.Year, startDate.Month, startDate.Day, 0, 0, 0);
-            var max = new DateTime(endDate.Year, endDate.Month, endDate.Day, 23, 0, 0);
+            var max = new DateTime(endDate.Year, endDate.Month, endDate.Day, 23, 59, 59);
 
             var result = await _collection
                 .FindAsync(x => (x.Timestamp > min) & (x.Timestamp < max)).Result.ToListAsync();
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger), "FilterLogs")]
+        public async Task<IDataResult<List<MongoDbLog>>> GetFilteredLogs(MongoLogSearchRequestDto searchRequestDto)
+        {
+            var result = await _collection.FindAsync(x =>
+                    x.MessageTemplate.StartsWith(
+                        $"Project: {searchRequestDto.ProjectName} Key: {searchRequestDto.Key}"))
+                .Result.ToListAsync();
+            return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
+        }
+
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
-        public async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
+        private async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
         {
             var min = new DateTime(logDate.Year, logDate.Month, logDate.Day, 0, 0, 0);
-            var max = new DateTime(logDate.Year, logDate.Month, logDate.Day, 23, 0, 0);
+            var max = new DateTime(logDate.Year, logDate.Month, logDate.Day, 23, 59, 59);
             var result = await _collection
                 .FindAsync(x => (x.Timestamp > min) & (x.Timestamp < max)).Result.ToListAsync();
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger))]
+        [LogAspect(typeof(FileLogger), "PusulaRegister")]
         [CacheAspect]
-        public async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
+        private async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
         {
             var result = (await _collection.FindAsync(x => true))
                 .ToListAsync().Result;

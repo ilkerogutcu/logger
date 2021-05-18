@@ -8,8 +8,9 @@
       <PackageReference Include="Autofac" Version="6.1.0" />
       <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
       <PackageReference Include="Ionic.Zip" Version="1.9.1.8" />
+      <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.0-preview.3.21201.13" />
+      <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
         <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0-preview.2.21154.6" />
-        
     </ItemGroup>
 
     <ItemGroup>

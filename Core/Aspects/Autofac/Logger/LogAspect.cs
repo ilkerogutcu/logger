@@ -7,6 +7,7 @@ using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Core.Utilities.Messages;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 
@@ -16,34 +17,35 @@ namespace Core.Aspects.Autofac.Logger
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly LoggerServiceBase _loggerServiceBase;
+        private readonly string _keyValue;
 
-        public LogAspect(Type loggerService)
+        public LogAspect(Type loggerService, string key)
         {
             if (loggerService.BaseType != typeof(LoggerServiceBase))
                 throw new ArgumentException(AspectMessages.WrongLoggerType);
-
+            _keyValue = key;
             _loggerServiceBase = (LoggerServiceBase) ServiceTool.ServiceProvider.GetService(loggerService);
             _httpContextAccessor = ServiceTool.ServiceProvider.GetService<IHttpContextAccessor>();
         }
 
-        // protected override void OnBefore(IInvocation invocation)
-        // {
-        //     var result = GetLogDetail(invocation);
-        //     _loggerServiceBase.Info($"OnBefore: {result}");
-        // }
+        protected override void OnBefore(IInvocation invocation)
+        {
+            var result = GetLogDetail(invocation);
+            _loggerServiceBase.Info($"Project: {GetProjectName()} Key: {_keyValue} OnBefore: {result}");
+        }
 
         protected override void OnException(IInvocation invocation, Exception e)
         {
             var result = GetLogDetailWithException(invocation, e);
             _loggerServiceBase.Error(
-                $"OnException {result}");
+                $"Project: {GetProjectName()} Key: {_keyValue} OnException {result}");
         }
 
         protected override void OnSuccess(IInvocation invocation)
         {
             var result = GetLogDetail(invocation);
             _loggerServiceBase.Info(
-                $"OnSuccess Method Name: {result}");
+                $"Project: {GetProjectName()} Key: {_keyValue} OnSuccess Method Name: {result}");
         }
 
         // protected override void OnAfter(IInvocation invocation)
@@ -62,7 +64,12 @@ namespace Core.Aspects.Autofac.Logger
                 User = _httpContextAccessor.HttpContext?.User.Identity?.Name ?? "?",
                 ExceptionMessage = e.Message
             };
-            return JsonConvert.SerializeObject(logDetail);
+            return JsonConvert.SerializeObject(logDetail, Formatting.None,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    DateFormatHandling = DateFormatHandling.IsoDateFormat
+                });
         }
 
         private string GetLogDetail(IInvocation invocation)
@@ -94,6 +101,12 @@ namespace Core.Aspects.Autofac.Logger
                     ReturnValue = invocation.ReturnValue
                 });
             return logParameters;
+        }
+
+        private static string GetProjectName()
+        {
+            var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
+            return configuration?.GetSection("SeriLogConfigurations:ProjectName").Value;
         }
     }
 }

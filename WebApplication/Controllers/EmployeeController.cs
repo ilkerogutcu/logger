@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Business.Abstract;
-using Core.Aspects.Autofac.Logger;
-using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Utilities.Results;
 using Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +19,18 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("get-employees")]
-        [LogAspect(typeof(FileLogger))]
+        // [Authorize(Roles = UserRoles.Admin)]
         public IDataResult<List<Employee>> Get()
         {
             return _employeeService.GetAll();
+        }
+
+        [HttpPost]
+        [Route("update-employee")]
+        // [Authorize(Roles = UserRoles.Admin)]
+        public IDataResult<Employee> Update(Employee employee)
+        {
+            return _employeeService.Update(employee);
         }
     }
 }

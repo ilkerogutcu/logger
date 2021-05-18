@@ -20,7 +20,7 @@ namespace Business.DependencyResolvers
             builder.RegisterType<FileLogManager>().As<IFileLogService>().SingleInstance();
             builder.RegisterType<MongoDbLogManager>().As<IMongoDbLogService>().SingleInstance();
 
-            builder.RegisterType<ApplicationDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationDbContext>();
 
             var assembly = Assembly.GetExecutingAssembly();
 

@@ -7,5 +7,6 @@ namespace Business.Abstract
     public interface IEmployeeService
     {
         public IDataResult<List<Employee>> GetAll();
+        public IDataResult<Employee> Update(Employee employee);
     }
 }

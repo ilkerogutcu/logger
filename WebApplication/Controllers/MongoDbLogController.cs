@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using Core.Entities.Concrete;
 using Core.Utilities.Results;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
@@ -21,23 +22,17 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         [Route("get-logs")]
-        public async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
+        public async Task<IDataResult<List<MongoDbLog>>> GetLogs(DateTime startDate, DateTime endDate)
         {
-            return await _mongoDbLogService.GetAllLogs();
+            return await _mongoDbLogService.GetLogs(startDate, endDate);
         }
 
-        [HttpGet]
-        [Route("get-logs-by-date")]
-        public async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
-        {
-            return await _mongoDbLogService.GetLogsByDate(logDate);
-        }
 
-        [HttpGet]
-        [Route("get-logs-by-date-range")]
-        public async Task<IDataResult<List<MongoDbLog>>> GetLogsByDateRange(DateTime startDate, DateTime endDate)
+        [HttpPost]
+        [Route("filtered-logs")]
+        public async Task<IDataResult<List<MongoDbLog>>> FilteredLogs(MongoLogSearchRequestDto requestDto)
         {
-            return await _mongoDbLogService.GetLogFilesByDateRange(startDate, endDate);
+            return await _mongoDbLogService.GetFilteredLogs(requestDto);
         }
     }
 }
