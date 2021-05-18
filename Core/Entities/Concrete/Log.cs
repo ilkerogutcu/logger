@@ -1,4 +1,6 @@
 ﻿using System;
+using Nest;
+
 
 namespace Core.Entities.Concrete
 {
@@ -6,6 +8,7 @@ namespace Core.Entities.Concrete
     {
         public string MessageTemplate { get; set; }
         public string Level { get; set; }
-        public DateTimeOffset TimeStamp { get; set; }
+        [Date(Name = "@timestamp")]
+        public DateTime Timestamp { get; set; }
     }
 }

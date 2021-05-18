@@ -115,7 +115,7 @@ namespace Business.Concrete
                 return new SuccessDataResult<TokenResponseDto>(new TokenResponseDto
                 {
                     Token = new JwtSecurityTokenHandler().WriteToken(token),
-                    ValidTo = token.ValidTo.ToString("yyyy-MM-ddThh:mm:ss")
+                    ValidTo = token.ValidTo.ToString("yyyy-MM-ddThh:mm:ss"),
                 }, Messages.TokenCreatedSuccessfully);
             await SendTwoFactorToken(user.Email);
             return new ErrorDataResult<TokenResponseDto>(Messages.RequiredTwoFactoryCode);

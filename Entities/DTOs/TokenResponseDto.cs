@@ -4,5 +4,6 @@
     {
         public string Token { get; set; }
         public string ValidTo { get; set; }
+
     }
 }
