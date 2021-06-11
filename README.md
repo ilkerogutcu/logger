@@ -1,5 +1,7 @@
-# Logger
-MongoDB Logger - File Logger - Elasticsearch Logger with serilog .NET 5
+
+# logger
+MongoDB Logger - File Logger - Elasticsearch|Kibana Logger with serilog .NET 5
+
 
 
 ## Usage
