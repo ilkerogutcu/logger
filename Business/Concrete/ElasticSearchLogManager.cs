@@ -23,7 +23,7 @@ namespace Business.Concrete
             _elasticSearch = elasticSearch;
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         public async Task<IDataResult<IEnumerable<ElasticSearchGetModel<Log>>>> GetLogsByDate(DateTime logDate,
             int from = 0, int size = 10)
@@ -36,7 +36,7 @@ namespace Business.Concrete
         }
 
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
             DateTime startDate, DateTime endDate, int from = 0, int size = 10)
@@ -64,7 +64,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ElasticSearchGetModel<Log>>>(list, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         private async Task<List<ElasticSearchGetModel<Log>>> ElasticSearchGetModels(DateTime logDate, int from,
             int size)

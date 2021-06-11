@@ -20,7 +20,7 @@ namespace Business.Concrete
 {
     public class FileLogManager : IFileLogService
     {
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
         {
@@ -35,8 +35,8 @@ namespace Business.Concrete
 
             while (iterator.MoveNext())
             {
-                var item = iterator.Current.ToString("yyyy.MM.dd").Replace(".", "");
-                var files = filePaths.FindAll(x => x.Substring(7, 8) == item);
+                var item = iterator.Current.ToString("yyyy-MM-dd");
+                var files = filePaths.FindAll(x => x.EndsWith(item+".txt"));
                 if (files.Count > 0)
                     files.ForEach(x => zip.AddFile($"{x}", "Files"));
             }
@@ -53,16 +53,16 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            var fileName = logDate.ToString("yyyy.MM.dd").Replace(".", "");
+            var fileName = logDate.ToString("yyyy-MM-dd");
 
             using var zip = new ZipFile {AlternateEncodingUsage = ZipOption.AsNecessary};
             zip.AddDirectoryByName("Files");
-            zip.AddFile($"./{GetFilePath()}/{fileName}.txt", "Files");
+            zip.AddFile($"{GetFilePath()}/{fileName}.txt", "Files");
             var zipName = $"Zip_{DateTime.Now:yyyy-MMM-dd-HHmmss}.zip";
             await using var memoryStream = new MemoryStream();
             zip.Save(memoryStream);
@@ -75,18 +75,13 @@ namespace Business.Concrete
             };
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public IDataResult<List<FileModel>> GetAllLogs()
         {
             var filePaths = Directory.GetFiles(GetFilePath());
-            var files = new List<FileModel>();
-            foreach (var filePath in filePaths)
-                files.Add(new FileModel
-                {
-                    FileName = Path.GetFileName(filePath),
-                    FilePath = filePath
-                });
+            var files = filePaths.Select(filePath => new FileModel
+                {FileName = Path.GetFileName(filePath), FilePath = filePath}).ToList();
 
             return new SuccessDataResult<List<FileModel>>(files, Messages.LogsListed);
         }

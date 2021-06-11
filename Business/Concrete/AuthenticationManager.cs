@@ -39,7 +39,7 @@ namespace Business.Concrete
             _signInManager = signInManager;
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Register")]
         public async Task<IResult> Register(UserForRegisterDto model, string url)
         {
             if (await _userManager.FindByNameAsync(model.Username) != null)
@@ -70,7 +70,7 @@ namespace Business.Concrete
                 : new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Register")]
         public async Task<IResult> RegisterAdmin(UserForRegisterDto model, string url)
         {
             if (await _userManager.FindByNameAsync(model.Username) != null)
@@ -96,7 +96,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.UserCreatedSuccessfully);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Login")]
         public async Task<IDataResult<TokenResponseDto>> Login(UserForLoginDto model)
         {
             var user = await _userManager.FindByNameAsync(model.Username);
@@ -121,13 +121,13 @@ namespace Business.Concrete
             return new ErrorDataResult<TokenResponseDto>(Messages.RequiredTwoFactoryCode);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Signout")]
         public async void SignOut()
         {
             await _signInManager.SignOutAsync();
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Email")]
         public async Task<IResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -138,7 +138,7 @@ namespace Business.Concrete
                 : new ErrorResult(Messages.ErrorVerifyingMail);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Enable")]
         public async Task<IResult> EnableTwoFactorSecurity(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -149,7 +149,7 @@ namespace Business.Concrete
                 : new ErrorResult(Messages.FailedToUpdateUser);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Disable")]
         public async Task<IResult> DisableTwoFactorSecurity(string id)
         {
             var user = await _userManager.FindByIdAsync(id);
@@ -180,7 +180,7 @@ namespace Business.Concrete
             });
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Generate")]
         private async Task<JwtSecurityToken> GenerateJwtSecurityToken(ApplicationUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -202,7 +202,7 @@ namespace Business.Concrete
             );
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "Register")]
         private async Task SendEmailForConfirmation(ApplicationUser user, string url)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);

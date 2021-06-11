@@ -10,7 +10,7 @@ namespace Business.Concrete
 {
     public class EmployeeManager : IEmployeeService
     {
-        [LogAspect(typeof(ElasticsearchLogger), "PusulaRegister")]
+        [LogAspect(typeof(FileLogger), "GetEmployee")]
         public IDataResult<List<Employee>> GetAll()
         {
             return new SuccessDataResult<List<Employee>>(new List<Employee>
@@ -32,7 +32,7 @@ namespace Business.Concrete
             }, Messages.EmployeesListed);
         }
 
-        [LogAspect(typeof(ElasticsearchLogger), "Update")]
+        [LogAspect(typeof(ElasticsearchLogger), "UpdateEmployee")]
         public IDataResult<Employee> Update(Employee employee)
         {
             employee.Lastname = "öğütcü";
