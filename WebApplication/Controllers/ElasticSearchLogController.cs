@@ -20,8 +20,7 @@ namespace WebApplication.Controllers
         {
             _elasticSearchLogService = elasticSearchLogService;
         }
-
-
+        
         [HttpGet]
         [Route("get-logs-by-date")]
         public async Task<IDataResult<IEnumerable<ElasticSearchGetModel<Log>>>> GetLogsByDate(DateTime logDate,
