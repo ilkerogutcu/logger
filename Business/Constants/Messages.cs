@@ -1,5 +1,8 @@
 ﻿namespace Business.Constants
 {
+    /// <summary>
+    ///     Messages
+    /// </summary>
     public static class Messages
     {
         public const string EmployeesListed = "Employees Listed.";

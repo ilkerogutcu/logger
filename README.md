@@ -5,7 +5,17 @@ MongoDB Logger - File Logger - Elasticsearch Logger with serilog .NET 5
 ## Usage
 You need to edit "appsettings.json" before start the project.
 
- 
+ - Mail Settings
+   ```c#
+  "MailSettings": {
+    "Mail": "darian.cronin51@ethereal.email",
+    "DisplayName": "ilker.ogutcu",
+    "Password": "9s6H3sBS9Wpmak",
+    "Host": "smtp.ethereal.email",
+    "Port": 587
+  }
+```
+
  - ElasticSearch Config
   ```c#
 "ElasticSearchConfig": {

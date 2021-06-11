@@ -18,8 +18,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Business.Concrete
 {
+    /// <summary>
+    ///     File Log Manager
+    /// </summary>
     public class FileLogManager : IFileLogService
     {
+        /// <summary>
+        ///     Get log files by date range
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
         [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogFilesByDateRange(DateTime startDate, DateTime endDate)
@@ -36,7 +45,7 @@ namespace Business.Concrete
             while (iterator.MoveNext())
             {
                 var item = iterator.Current.ToString("yyyy-MM-dd");
-                var files = filePaths.FindAll(x => x.EndsWith(item+".txt"));
+                var files = filePaths.FindAll(x => x.EndsWith(item + ".txt"));
                 if (files.Count > 0)
                     files.ForEach(x => zip.AddFile($"{x}", "Files"));
             }
@@ -53,6 +62,11 @@ namespace Business.Concrete
             };
         }
 
+        /// <summary>
+        ///     Get logs by date
+        /// </summary>
+        /// <param name="logDate"></param>
+        /// <returns></returns>
         [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public async Task<FileContentResultModel> GetLogsByDate(DateTime logDate)
@@ -75,6 +89,10 @@ namespace Business.Concrete
             };
         }
 
+        /// <summary>
+        ///     Get all logs
+        /// </summary>
+        /// <returns></returns>
         [LogAspect(typeof(FileLogger), "GetFileLogs")]
         [CacheAspect]
         public IDataResult<List<FileModel>> GetAllLogs()
@@ -86,6 +104,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<FileModel>>(files, Messages.LogsListed);
         }
 
+        /// <summary>
+        ///     Returns the file path where the logs
+        /// </summary>
+        /// <returns></returns>
         private static string GetFilePath()
         {
             var configuration = ServiceTool.ServiceProvider.GetService<IConfiguration>();
