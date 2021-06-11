@@ -10,6 +10,10 @@ namespace Business.Concrete
 {
     public class EmployeeManager : IEmployeeService
     {
+        /// <summary>
+        ///     Get all employees for example log output
+        /// </summary>
+        /// <returns></returns>
         [LogAspect(typeof(FileLogger), "GetEmployee")]
         public IDataResult<List<Employee>> GetAll()
         {
@@ -32,6 +36,10 @@ namespace Business.Concrete
             }, Messages.EmployeesListed);
         }
 
+        /// <summary>
+        ///     Update employee for example log output
+        /// </summary>
+        /// <returns></returns>
         [LogAspect(typeof(ElasticsearchLogger), "UpdateEmployee")]
         public IDataResult<Employee> Update(Employee employee)
         {

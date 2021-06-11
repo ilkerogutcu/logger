@@ -5,6 +5,13 @@ namespace Business.Constants
 {
     public static class Utilities
     {
+        /// <summary>
+        ///     Get date range for 2 date
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static IEnumerable<DateTime> GetDateRange(DateTime startDate, DateTime endDate)
         {
             if (endDate < startDate)
