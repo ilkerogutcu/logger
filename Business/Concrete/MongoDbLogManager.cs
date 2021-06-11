@@ -14,10 +14,17 @@ using MongoDB.Driver;
 
 namespace Business.Concrete
 {
+    /// <summary>
+    ///     Mongo Database Log Manager
+    /// </summary>
     public class MongoDbLogManager : IMongoDbLogService
     {
         private readonly IMongoCollection<MongoDbLog> _collection;
 
+        /// <summary>
+        ///     Mongo Database Log Manager consturctor
+        /// </summary>
+        /// <param name="settings"></param>
         public MongoDbLogManager(IMongoDbSettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
@@ -25,7 +32,13 @@ namespace Business.Concrete
             _collection = database.GetCollection<MongoDbLog>(settings.CollectionName);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Get logs
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetMongoDbLogs")]
         [CacheAspect]
         public async Task<IDataResult<List<MongoDbLog>>> GetLogs(DateTime startDate, DateTime endDate)
         {
@@ -40,7 +53,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger), "FilterLogs")]
+        /// <summary>
+        ///     Get filtered logs
+        /// </summary>
+        /// <param name="searchRequestDto"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetMongoDbLogs")]
         public async Task<IDataResult<List<MongoDbLog>>> GetFilteredLogs(MongoLogSearchRequestDto searchRequestDto)
         {
             var result = await _collection.FindAsync(x =>
@@ -50,7 +68,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Get logs by date
+        /// </summary>
+        /// <param name="logDate"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetMongoDbLogs")]
         [CacheAspect]
         private async Task<IDataResult<List<MongoDbLog>>> GetLogsByDate(DateTime logDate)
         {
@@ -61,13 +84,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Get all logs
+        /// </summary>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetMongoDbLogs")]
         [CacheAspect]
         private async Task<IDataResult<List<MongoDbLog>>> GetAllLogs()
         {
-            var result = (await _collection.FindAsync(x => true))
-                .ToListAsync().Result;
-            return new SuccessDataResult<List<MongoDbLog>>(result, Messages.LogsListed);
+            var result = await _collection.FindAsync(x => true);
+            return new SuccessDataResult<List<MongoDbLog>>(await result.ToListAsync(), Messages.LogsListed);
         }
     }
 }

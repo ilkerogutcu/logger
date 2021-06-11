@@ -14,16 +14,30 @@ using Entities.DTOs;
 
 namespace Business.Concrete
 {
+    /// <summary>
+    ///     ElasticSearch Log Manager
+    /// </summary>
     public class ElasticSearchLogManager : IElasticSearchLogService
     {
         private readonly IElasticSearch _elasticSearch;
 
+        /// <summary>
+        ///     ElasticSearch Log Manager Constructor
+        /// </summary>
+        /// <param name="elasticSearch"></param>
         public ElasticSearchLogManager(IElasticSearch elasticSearch)
         {
             _elasticSearch = elasticSearch;
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Get logs by date
+        /// </summary>
+        /// <param name="logDate"></param>
+        /// <param name="from"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         public async Task<IDataResult<IEnumerable<ElasticSearchGetModel<Log>>>> GetLogsByDate(DateTime logDate,
             int from = 0, int size = 10)
@@ -36,7 +50,15 @@ namespace Business.Concrete
         }
 
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Get logs by date range
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="from"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         public async Task<IDataResult<List<List<ElasticSearchGetModel<Log>>>>> GetLogsByDateRange(
             DateTime startDate, DateTime endDate, int from = 0, int size = 10)
@@ -52,6 +74,11 @@ namespace Business.Concrete
             return new SuccessDataResult<List<List<ElasticSearchGetModel<Log>>>>(logList, Messages.LogsListed);
         }
 
+        /// <summary>
+        ///     Get search by field
+        /// </summary>
+        /// <param name="elasticSearchRequestDto"></param>
+        /// <returns></returns>
         public async Task<IDataResult<List<ElasticSearchGetModel<Log>>>> GetSearchByField(
             ElasticSearchRequestDto elasticSearchRequestDto)
         {
@@ -64,7 +91,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ElasticSearchGetModel<Log>>>(list, Messages.LogsListed);
         }
 
-        [LogAspect(typeof(FileLogger), "PusulaRegister")]
+        /// <summary>
+        ///     Elastic Search get models
+        /// </summary>
+        /// <param name="logDate"></param>
+        /// <param name="from"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        [LogAspect(typeof(FileLogger), "GetElasticSearchLogs")]
         [CacheAspect]
         private async Task<List<ElasticSearchGetModel<Log>>> ElasticSearchGetModels(DateTime logDate, int from,
             int size)

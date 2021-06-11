@@ -1,4 +1,0 @@
-2021-05-03 13:46:05.941 +03:00 [Information] OnSuccess Method Name: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}
-2021-05-03 14:07:46.125 +03:00 [Information] OnSuccess Method Name: {"FullName":"Core.Utilities.Results.IDataResult`1[System.Collections.Generic.List`1[Entities.Employee]] GetAll()","MethodName":"GetAll","User":"?","Parameters":[]}
-2021-05-03 14:16:39.140 +03:00 [Information] OnSuccess Method Name: {"FullName":"Void SignOut()","MethodName":"SignOut","User":"?","Parameters":[]}
-2021-05-03 14:16:43.507 +03:00 [Information] OnSuccess Method Name: {"FullName":"Void SignOut()","MethodName":"SignOut","User":"?","Parameters":[]}

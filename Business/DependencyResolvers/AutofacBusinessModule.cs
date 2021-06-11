@@ -10,8 +10,15 @@ using Module = Autofac.Module;
 
 namespace Business.DependencyResolvers
 {
+    /// <summary>
+    ///     Dependency resolvers for business layer
+    /// </summary>
     public class AutofacBusinessModule : Module
     {
+        /// <summary>
+        ///     Resolvers
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AuthenticationManager>().As<IAuthenticationService>().SingleInstance();
